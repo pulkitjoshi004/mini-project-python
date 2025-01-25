@@ -1,37 +1,30 @@
 import random
-'''
-1 for snake
--1 for water
-0 for gun
 
-'''
+# Mapping user input to numbers
+youdict = {"s": 1, "w": -1, "g": 0}
+reversdict = {1: "Snake", -1: "Water", 0: "Gun"}
 
-computer = random.choice([1,2,3])
-youstr= input("Enter your choice: ")
+# Computer's random choice (fixed)
+computer = random.choice([1, -1, 0])
 
-youdict= {"s":1,"w":-1,"g":0}
-reversdict={1:"rock",2:"paper",3:"scissor"}
+# Get user input
+youstr = input("Enter your choice (s for Snake, w for Water, g for Gun): ").lower()
 
-you=youdict[youstr]
-
-#by now we have 2 numbers (variables), you and computer
-
-print(f"you chose{reversdict[you]}\n computer choice{reversdict[computer]}")
-
-if(computer==you):
-    print("its a draw")
+# Validate input
+if youstr not in youdict:
+    print("Invalid input! Please choose 's', 'w', or 'g'.")
 else:
-    if(computer==-1 and you==1):
-        print("you win!")
-    elif(computer==-1 and you==0):
-        print("you loose!")
-    elif(computer==1 and you==-1):
-        print("you loose!")
-    elif(computer==1 and you==0):
-        print("you win!")
-    elif(computer==0 and you==-1):
-        print("you win!")
-    elif(computer==0 and you==1):
-        print("you loose!")
+    # Map user choice
+    you = youdict[youstr]
+
+    # Display choices
+    print(f"You chose {reversdict[you]}")
+    print(f"Computer chose {reversdict[computer]}")
+
+    # Determine the result
+    if computer == you:
+        print("It's a draw!")
+    elif (you - computer) % 3 == 1:
+        print("You win!")
     else:
-        print("something went wrong")
+        print("You lose!")
